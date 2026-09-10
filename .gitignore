@@ -1,0 +1,4 @@
+*.csv
+!outputs/tabela_executiva_ap.csv
+.ipynb_checkpoints/
+__pycache__/
