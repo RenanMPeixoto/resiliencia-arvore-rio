@@ -96,14 +96,21 @@ Rode scripts/pipeline_resiliencia_urbana.py para gerar as figuras e a tabela exe
     
 text
 ├── README.md                           # Storytelling executivo e documentação
+
 ├── requirements.txt                    # Dependências do projeto
+
 ├── sql/
+
 │   ├── 01_extracao_preventiva_2023.sql # DQL no BigQuery (recorte de rotina)
+
 │   └── 02_extracao_estresse_2026.sql   # DQL no BigQuery (confronto vendaval)
+
 ├── notebooks/
 │   └── analise_exploratoria_1746.ipynb # Profiling, limpeza e exploração
+
 ├── scripts/
 │   └── pipeline_resiliencia_urbana.py  # Pipeline ponta a ponta em Python
+
 └── outputs/
     ├── fig1_gargalo_sla_zona_sul.png   # Visualização explanatória 1
     └── fig2_dispersao_passivo_vs_quedas.
