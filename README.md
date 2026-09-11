@@ -44,27 +44,40 @@ Visualização 2 — O Teste de Estresse Climático (Vendaval de Julho/2026)
 Mostrar Imagem
 
 Teste da hipótese: se a hipótese estivesse correta, a região com menor backlog e SLA mais rápido (AP 5, 6 dias) deveria concentrar a menor proporção de quedas no vendaval. Os dados mostram o oposto: a AP 5 registrou mais de 340 árvores tombadas — o maior volume de danos entre as regiões analisadas —, apesar do backlog pré-evento reduzido. A hipótese é rejeitada: a redução do passivo operacional não se traduziu na queda superior a 40% prevista; na região de melhor performance de SLA, o dano observado foi, na verdade, o mais severo.
+
 Insight estratégico: a velocidade de fechamento de chamados pontuais funcionou como métrica de vaidade. A Zona Oeste sofreu destruição em massa por fatores exógenos ao processo administrativo — hipoteticamente, rajadas de vento canalizadas em áreas descampadas, topografia desprotegida e espécies arbóreas mais vulneráveis ao cisalhamento (fatores não mensurados diretamente neste dataset, citados aqui como leitura de contexto, não como achado estatístico). A resposta rápida da rotina não se traduziu em resiliência climática.
+
 5. Limitações e Próximos Passos
 Subnotificação: nem toda árvore caída ou em risco gera um chamado 1746 — o dataset capta apenas o que foi formalmente reportado, o que pode subestimar o problema em regiões com menor engajamento cidadão no canal.
 Completude variável por região: a qualidade do preenchimento de campos (bairro, subtipo, datas) pode variar entre subprefeituras, afetando comparações diretas de volume.
+
 Causas exógenas não mensuradas: variáveis como velocidade do vento, cobertura de copa e espécie da árvore não estão no dataset do 1746 e precisariam de fontes externas (ex.: dados meteorológicos, INEA) para sair do campo da hipótese qualitativa.
 Próximo passo natural: enriquecer a análise com dados de vento/pluviometria por região para testar estatisticamente os fatores exógenos citados na Seção 4, e não apenas assumi-los por conhecimento de domínio.
-6. Recomendações Prescritivas (Framework CAMS)
+7. Recomendações Prescritivas (Framework CAMS)
+
 Cultura: alterar a remuneração e metas dos distritos operacionais da Comlurb. O foco deve deixar de ser o menor SLA em dias (que incentiva o fechamento de podas fáceis) e passar a ser o Índice de Cobertura Arbórea Crítica.
+
 Automação: implementar rotinas em nuvem (BigQuery + APIs meteorológicas) para alertar automaticamente as subprefeituras sobre corredores de ventania iminente, despachando caminhões com antecedência para as vias arteriais de maior risco.
+
 Métricas: instituir meta mandatória de redução do passivo — nenhuma árvore em corredores estruturais deve permanecer mais de 30 dias em backlog durante outono e inverno.
+
 Compartilhamento: criar comitê integrado de despacho (Comlurb, Defesa Civil, CET-Rio e Light) para destravar autorizações e desligamentos conjuntos na Zona Sul, reduzindo o tempo de atendimento de 237 para menos de 60 dias.
-7. Como Reproduzir
+
+8. Como Reproduzir
 bash
 git clone <repo>
 cd <repo>
 pip install -r requirements.txt
+
 Configure as credenciais do BigQuery (variável de ambiente GOOGLE_APPLICATION_CREDENTIALS apontando para o JSON da service account).
 Execute as queries em sql/ para extrair os dados brutos.
+
 Rode notebooks/analise_exploratoria_1746.ipynb para reproduzir a limpeza e o profiling.
+
 Rode scripts/pipeline_resiliencia_urbana.py para gerar as figuras e a tabela executiva em outputs/.
-8. Estrutura do Repositório
+
+10. Estrutura do Repositório
+    
 text
 ├── README.md                           # Storytelling executivo e documentação
 ├── requirements.txt                    # Dependências do projeto
