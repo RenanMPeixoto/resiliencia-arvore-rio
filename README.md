@@ -13,13 +13,20 @@ Impacto esperado: fornecer à Secretaria de Conservação e à Comlurb uma diret
 Dados extraídos e tratados a partir dos repositórios oficiais da Prefeitura do Rio, com foco nas dimensões de Validade, Consistência, Completude e Atualização.
 
 Armazenamento e extração: Google Cloud Platform (BigQuery), consultando datario.adm_central_atendimento_1746.chamado integrado à tabela dimensional datario.dados_mestres.bairro.
+
 Tratamento e engenharia (Fix, Drop, Impute, Flag):
+
 Drop: descarte de registros sem ancoragem territorial (31 linhas com bairro/subprefeitura nulos, < 0,8% da base).
+
 Flag: criação do indicador booleano resolvido (data_fim.notnull()) para tratar separadamente o passivo pendente e evitar viés de sobrevivência.
+
 Fix (consistência territorial): correção da classificação das subprefeituras da Grande Tijuca e dos Grandes Complexos, incorporando 377 chamados à AP 3 (Zona Norte) que haviam sido omitidos pela rotina de texto simples.
+
 Data Tracking Sheet do Projeto
 Pergunta de Negócio	Dado / Atributo	Base ou Calculada?	Cálculo / Regra de Negócio	Fonte
-Qual chamado foi aberto e qual o serviço?	id_chamado, subtipo	Base	Filtro: "Poda de árvore em logradouro"	Data.Rio (chamado)
+
+Qual chamado foi aberto e qual o serviço?	id_chamado, subtipo	Base	
+Filtro: "Poda de árvore em logradouro"	Data.Rio (chamado)
 Em qual macrozona ocorreu a demanda?	ap_regiao, subprefeitura	Calculada	Mapeamento por correspondência textual das subprefeituras oficiais	Data.Rio (bairro)
 Quando foi solicitado e quando encerrado?	data_inicio, data_fim	Base	Parsing temporal em datetime64[ns]	Data.Rio (chamado)
 Quanto tempo a Prefeitura levou para atender?	sla_dias	Calculada	DATE_DIFF(DATE(data_fim), DATE(data_inicio), DAY)	Calculada via DQL/Pandas
