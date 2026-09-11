@@ -26,13 +26,22 @@ Data Tracking Sheet do Projeto
 Pergunta de Negócio	Dado / Atributo	Base ou Calculada?	Cálculo / Regra de Negócio	Fonte
 
 Qual chamado foi aberto e qual o serviço?	id_chamado, subtipo	Base	
+
 Filtro: "Poda de árvore em logradouro"	Data.Rio (chamado)
-Em qual macrozona ocorreu a demanda?	ap_regiao, subprefeitura	Calculada	Mapeamento por correspondência textual das subprefeituras oficiais	Data.Rio (bairro)
-Quando foi solicitado e quando encerrado?	data_inicio, data_fim	Base	Parsing temporal em datetime64[ns]	Data.Rio (chamado)
+
+Em qual macrozona ocorreu a demanda?	ap_regiao, subprefeitura	
+Calculada	Mapeamento por correspondência textual das subprefeituras oficiais	Data.Rio (bairro)
+Quando foi solicitado e quando encerrado?	data_inicio, data_fim	
+Base	Parsing temporal em datetime64[ns]	Data.Rio (chamado)
 Quanto tempo a Prefeitura levou para atender?	sla_dias	Calculada	DATE_DIFF(DATE(data_fim), DATE(data_inicio), DAY)	Calculada via DQL/Pandas
-O serviço foi efetivamente executado?	resolvido	Calculada	Booleano: True se data_fim preenchida	Calculada
-Qual o backlog pré-evento climático?	podas_pendentes	Calculada	Volume sem conclusão aberto entre Fev/2026 e 28/07/2026	BigQuery / 1746
-Qual o dano real sofrido no vendaval?	quedas_registradas	Calculada	Chamados de emergência de queda (29/07 a 02/08/2026)	BigQuery / 1746
+
+O serviço foi efetivamente executado?	resolvido	
+Calculada	Booleano: True se data_fim preenchida	Calculada
+Qual o backlog pré-evento climático?	podas_pendentes	Calculada	
+Volume sem conclusão aberto entre Fev/2026 e 28/07/2026	BigQuery / 1746
+Qual o dano real sofrido no vendaval?	quedas_registradas	Calculada	
+Chamados de emergência de queda (29/07 a 02/08/2026)	BigQuery / 1746
+
 3. Metodologia e Hipótese
 Métrica central robusta: substituição da média aritmética pela mediana. Outliers extremos (chamados que levaram até 743 dias para fechar) inflavam a média municipal para 101 dias, mascarando que 50% dos chamados da cidade são atendidos em até 21 dias.
 Hipótese de trabalho:
